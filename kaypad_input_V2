@@ -41,8 +41,8 @@ void setup() {
   servoset2.attach(11);
   servoset3.attach(12);
   servoset4.attach(13);
-  servoset1.write(0);
-  servoset2.write(0);
+  servoset1.write(0);//prevent the servo jump at startup
+  servoset2.write(0);//prevent the servo jump at startup
 
 }
 
