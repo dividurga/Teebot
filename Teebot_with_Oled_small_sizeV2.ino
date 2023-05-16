@@ -1,4 +1,4 @@
-
+//this works using the array system...OLED can handle!
 
 #include <SPI.h>
 #include <Wire.h>
