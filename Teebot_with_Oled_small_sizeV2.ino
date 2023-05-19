@@ -1,5 +1,5 @@
 //this works using the array system...OLED can handle!
-
+//import libs
 #include <SPI.h>
 #include <Wire.h>
 #include <Adafruit_GFX.h>
@@ -46,7 +46,7 @@ void setup() {
   }
   for (int m = 0; m < 4; m++) {
     servo[m].write(0);
-  }
+  }// to prevent jump of servos at start
 
 
   // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
@@ -58,7 +58,6 @@ void setup() {
   Serial.println("Success");
   delay(1000);
   // Show initial display buffer contents on the screen --
-  // the library initializes this with an Adafruit splash screen.
   display.clearDisplay();
 
   display.setTextSize(2);
@@ -86,7 +85,7 @@ void loop() {
 
   if (key) {
 
-    if (key >= '0' && key <= '9') {  // only act on numeric keys
+    if (key >= '0' && key <= '9') {  // only act on numbers
       inputString += key;
 
       display.setCursor(0, 50);
@@ -118,17 +117,18 @@ void loop() {
     display.println("Lay the Tshirt");
     display.display();
 
-    delay(5000);
+    delay(5000); //5 second delay to lay the tshirt
     display.clearDisplay();
     display.println("Folding...");
     display.display();
+    //for the servos 
     for (int j = 0; j < 4; j++) {
-      for (pos[j]; pos[j] <= 150; pos[j]++) {  // goes from 0 degrees to 180 degrees
+      for (pos[j]; pos[j] <= 150; pos[j]++) {  // goes from 0 degrees to 150 degrees
         // in steps of 1 degree
         servo[j].write(pos[j]);
         delay(3);
       }
-      for (pos[j] = 150; pos[j] >= 0; pos[j] -= 1) {  // goes from 180 degrees to 0 degrees
+      for (pos[j] = 150; pos[j] >= 0; pos[j] -= 1) {  // goes from 150 degrees to 0 degrees
         servo[j].write(pos[j]);
         delay(3);
       }
