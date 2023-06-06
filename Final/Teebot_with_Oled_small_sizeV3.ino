@@ -132,12 +132,12 @@ void loop() {
     display.println("Folding...");
     display.display();
     for (int j = 0; j < 4; j++) {
-      for (pos[j]; pos[j] <= 150; pos[j]++) {  // goes from 0 degrees to 180 degrees
+      for (pos[j]; pos[j] <= 150; pos[j]++) {  // goes from 0 degrees to 150 degrees
         // in steps of 1 degree
         servo[j].write(pos[j]);
         delay(3);
       }
-      for (pos[j] = 150; pos[j] >= 0; pos[j] -= 1) {  // goes from 180 degrees to 0 degrees
+      for (pos[j] = 150; pos[j] >= 0; pos[j] -= 1) {  // goes from 150 degrees to 0 degrees
         servo[j].write(pos[j]);
         delay(3);
       }
