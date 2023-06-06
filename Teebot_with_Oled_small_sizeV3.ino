@@ -109,6 +109,7 @@ void loop() {
         inputInt = inputString.toInt();  // typecast to int
 
         // Display static text
+        display.setCursor(0, 50);
         display.println(inputInt);
         display.display();
         inputString = "";
