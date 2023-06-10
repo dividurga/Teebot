@@ -77,6 +77,7 @@ void loop() {
 
   //code for getting input from keypad
   char key = keypad.getKey();
+  Serial.println(key);
   char inputChar[4];
   if (key) {
 
