@@ -17,16 +17,14 @@ Written by Divija Durga, with help from the contributions of the open source com
 
 
 
-
+// initialise oled (width, height, param,-1 for reset)
 Adafruit_SSD1306 display(128, 64, &Wire, -1);
 
 
-//initialise servo objects
-
-
+//initialise servos
 int pos[4] = { 0, 0, 0, 0 };
 Servo servo[4];
-const byte servoPins[] = { 9, 10, 11, 12 };
+const byte servoPins[] = { 10, 11, 12, 13 };
 int j = 0;
 
 
@@ -43,12 +41,13 @@ byte pin_column[4] = { 5, 4, 3, 2 };  //connect to the column pinouts of the key
 Keypad keypad = Keypad(makeKeymap(keys), pin_rows, pin_column, 4, 4);
 
 String inputString;
-long inputInt;
+int inputInt;
 
 
 void setup() {
   Serial.begin(9600);
   inputString.reserve(3);  // maximum number of digit for a number is 3
+  //loop to attach servos to pins
   for (int n = 0; n < 4; n++) {
     servo[n].attach(servoPins[n]);
   }
@@ -65,72 +64,68 @@ void setup() {
   }
   Serial.println("Success");
   delay(1000);
-  // Show initial display buffer contents on the screen --
-  // the library initializes this with an Adafruit splash screen.
   display.clearDisplay();
-
-  display.setTextSize(2);
-  display.setTextColor(WHITE);
-  display.setCursor(30, 10);
-  // Display static text
-  display.println("Teebot\n at your\n Service!");
-  display.display();
+  printDisplay("Teebot\n at your\n Service!", 30, 10, 2);
   delay(3000);
+  display.clearDisplay();
 }
 
 void loop() {
 
   display.clearDisplay();
-
-  display.setTextSize(1);
-  display.setTextColor(WHITE);
-  display.setCursor(0, 10);
-  // Display static text
-  display.println("Enter no. of Tshirts\n\n# to enter\n* to void");
-  display.display();
+  printDisplay("Enter no. of Tshirts\n\n# to enter\n* to void",0,10,1);
 
   //code for getting input from keypad
   char key = keypad.getKey();
-
+  Serial.println(key);
+  char inputChar[4];
   if (key) {
 
     if (key >= '0' && key <= '9') {  // only act on numeric keys
       inputString += key;
-
-      display.setCursor(0, 50);
-      // Display static text
-      display.println(inputString);
-      display.display();
+      inputString.toCharArray(inputChar, inputString.length()+1);//so that my printDisplay function can handle
+      printDisplay(inputChar,0,50,1);
       delay(1000);
+      
 
 
     } else if (key == '#') {
       if (inputString.length() > 0) {
         inputInt = inputString.toInt();  // typecast to int
-
         // Display static text
-        display.setCursor(0, 50);
-        display.println(inputInt);
-        display.display();
+        printDisplay(inputInt,0,50,1);
+        Serial.println(inputInt);
         inputString = "";
         delay(1000);  // clear input
       }
     } else if (key == '*') {
       inputString = "";  // clear input
     }
+    else if (key=='A'){
+      for (int i = 0; i < 4; i++) {
+      for (pos[i]; pos[i] <= 150; pos[i]++) {  // goes from 0 degrees to 150 degrees
+        // in steps of 1 degree
+        servo[i].write(pos[i]);
+        delay(3);
+      }
+      for (pos[i] = 150; pos[i] >= 0; pos[i] -= 1) {  // goes from 150 degrees to 0 degrees
+        servo[i].write(pos[i]);
+        delay(3);
+      }
+      delay(1000);
+      
+    }
+    }
   }
 
   for (int servocount = 0; servocount < inputInt; servocount += 1) {
     Serial.println(servocount);
     display.clearDisplay();
-    display.setCursor(0, 30);
-    display.println("Lay the Tshirt");
-    display.display();
+    printDisplay("Lay the Tshirt",0,30,1);
 
     delay(5000);
     display.clearDisplay();
-    display.println("Folding...");
-    display.display();
+    printDisplay("Folding...",0,30,1);
     for (int j = 0; j < 4; j++) {
       for (pos[j]; pos[j] <= 150; pos[j]++) {  // goes from 0 degrees to 150 degrees
         // in steps of 1 degree
@@ -148,4 +143,13 @@ void loop() {
   display.clearDisplay();
   key = 0;
   inputInt = 0;
+}
+
+
+void printDisplay(char str[], int cursx, int cursy, int size) {
+  display.setTextColor(WHITE);
+  display.setTextSize(size);
+  display.setCursor(cursx, cursy);
+  display.println(str);
+  display.display();
 }
