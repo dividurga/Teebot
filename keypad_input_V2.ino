@@ -56,7 +56,7 @@ void loop() {
       inputString += key;               // append new character 
     } else if (key == '#') {
       if (inputString.length() > 0) {
-        inputInt = inputString.toInt(); // YOU GOT AN INTEGER NUMBER
+        inputInt = inputString.toInt(); // int number
         Serial.println(inputInt);
         inputString = "";               // clear input
 
@@ -68,55 +68,55 @@ void loop() {
   
   // running loop for the servos
   for (int servocount=0;servocount<inputInt; servocount+=1){
-    for (pos1 = 0; pos1 <= 150; pos1 += 1) { // goes from 0 degrees to 180 degrees
+    for (pos1 = 0; pos1 <= 150; pos1 += 1) { // goes from 0 degrees to 150 degrees
     // in steps of 1 degree
     servoset1.write(pos1);              
     delay(skip);                       
   }
-  for (pos1 = 150; pos1 >= 0; pos1 -= 1) { // goes from 180 degrees to 0 degrees
+  for (pos1 = 150; pos1 >= 0; pos1 -= 1) { // goes from 150 degrees to 0 degrees
     servoset1.write(pos1);              
     delay(skip);                       
   }
   delay(timedelay);
-  for (pos2 = 0; pos2 <= 150; pos2 += 1) { // goes from 0 degrees to 180 degrees
+  for (pos2 = 0; pos2 <= 150; pos2 += 1) { // goes from 0 degrees to 150 degrees
     // in steps of 1 degree
     servoset2.write(pos2);              // tell servo to go to position in variable 'pos'
     delay(skip);                       // waits 15ms for the servo to reach the position
   }
-  for (pos2 = 150; pos2 >= 0; pos2 -= 1) { // goes from 180 degrees to 0 degrees
+  for (pos2 = 150; pos2 >= 0; pos2 -= 1) { // goes from 150 degrees to 0 degrees
     servoset2.write(pos2);              // tell servo to go to position in variable 'pos'
-    delay(skip);                       // waits 15ms for the servo to reach the position
+    delay(skip);                       // wait
   }
   Serial.println(servocount);
   delay(5000);
   /*
-  for (pos3 = 0; pos3 <= 150; pos3 += 1) { // goes from 0 degrees to 180 degrees
+  for (pos3 = 0; pos3 <= 150; pos3 += 1) { // goes from 0 degrees to 150 degrees
     // in steps of 1 degree
     servoset3.write(pos3);              // tell servo to go to position in variable 'pos'
-    delay(5);                       // waits 15ms for the servo to reach the position
+    delay(5);                       // wait
   }
-  for (pos3 = 150; pos3 >= 0; pos3 -= 1) { // goes from 180 degrees to 0 degrees
+  for (pos3 = 150; pos3 >= 0; pos3 -= 1) { // goes from 150 degrees to 0 degrees
     servoset3.write(pos3);              // tell servo to go to position in variable 'pos'
-    delay(5);                       // waits 15ms for the servo to reach the position
+    delay(5);                       // wait
   }
   delay(timedelay);
-  for (pos4 = 0; pos4 <= 150; pos4 += 1) { // goes from 0 degrees to 180 degrees
+  for (pos4 = 0; pos4 <= 150; pos4 += 1) { // goes from 0 degrees to 150 degrees
     // in steps of 1 degree
     servoset4.write(pos4);              // tell servo to go to position in variable 'pos'
-    delay(5);                       // waits 15ms for the servo to reach the position
+    delay(5);                       // wait
   }
-  for (pos4 = 150; pos4 >= 0; pos4 -= 1) { // goes from 180 degrees to 0 degrees
+  for (pos4 = 150; pos4 >= 0; pos4 -= 1) { // goes from 150 degrees to 0 degrees
     servoset4.write(pos4);              // tell servo to go to position in variable 'pos'
-    delay(5);                       // waits 15ms for the servo to reach the position
+    delay(5);                       // wait
   }
-  delay(timedelay);for (pos5 = 0; pos5<= 150; pos5 += 1) { // goes from 0 degrees to 180 degrees
+  delay(timedelay);for (pos5 = 0; pos5<= 150; pos5 += 1) { // goes from 0 degrees to 150 degrees
     // in steps of 1 degree
     servoset5.write(pos5);              // tell servo to go to position in variable 'pos'
-    delay(5);                       // waits 15ms for the servo to reach the position
+    delay(5);                       // wait
   }
-  for (pos5 = 150; pos5 >= 0; pos5 -= 1) { // goes from 180 degrees to 0 degrees
+  for (pos5 = 150; pos5 >= 0; pos5 -= 1) { // goes from 150 degrees to 0 degrees
     servoset5.write(pos5);              // tell servo to go to position in variable 'pos'
-    delay(5);                       // waits 15ms for the servo to reach the position
+    delay(5);                       
   }
   delay(timedelay);
   */ 
@@ -124,4 +124,6 @@ void loop() {
   }
   key=0;
   inputInt=0;
+  //reset vars
+  
 }
