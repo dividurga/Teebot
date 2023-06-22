@@ -5,7 +5,7 @@
 This is the code with full documentation for those who would like to modify and reuse it. 
 This version will not work with a SSD1306 Oled because of its size limitations. 
 
-see Teebot_with_Oled_small_size latest doc for Oled compatible version
+see teebot.ino for the Oled compatible version
 
 Written by Divija Durga, with help from the contributions of the open source community. 
 
