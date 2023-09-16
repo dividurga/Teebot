@@ -1,5 +1,6 @@
 # Teebot
 Video: https://youtu.be/ObF5q-qpk9U
+BlogPost: https://divija.info/2023/06/23/teebot-the-tshirt-folding-robot/
 
 Teebot is a tshirt folding robot that uses servos and a 4-panel system to fold tshirts. This robot was inspired by Sheldon from TBBT who used a platic contraption to fold his TShirts. Teebot offers two modes; the first is the 'single' mode which can be used to fold tshirts out one-by-one. The 'loop' mode, on the other hand, asks the user for the number of tshirts the user would like to fold and runs the folding mechanism multiple times till all the tshirts are folded. 
 
